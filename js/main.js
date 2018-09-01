@@ -92,13 +92,21 @@ function moveBola(){
 function novoJogo(vencedor){
     if(vencedor == "Player 1"){
         esquerda.score++;
+        if(esquerda.score == 10){
+            alert("Player 1 venceu!")
+        } 
     }else{
         direita.score++;
+        if(direita.score == 10) {
+            alert("Player 2 venceu!")
+        } 
     }
+
+    
     esquerda.y = canvas.height / 2 - esquerda.altura / 2;
     direita.y = esquerda.y;
     bola.y = canvas.height / 2 - bola.altura / 2;
-    bola.x = canvas.width / 2 - bola.largura / 2;s
+    bola.x = canvas.width / 2 - bola.largura / 2;
     bola.mod = 0;
 }
 
