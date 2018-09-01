@@ -14,7 +14,7 @@ var bola = {
     dirx: -1,
     diry: 1,
     mod: 0,
-    velocidade: 50
+    velocidade: 1
 };
 
 var esquerda = {
@@ -23,7 +23,7 @@ var esquerda = {
     altura: 120,
     largura: 20,
     score: 0,
-    velocidade: 15
+    velocidade: 10
 };
 
 var direita = {
@@ -32,7 +32,7 @@ var direita = {
     altura: 120,
     largura: 20,
     score: 0,
-    velocidade: 15
+    velocidade: 10
 };
 
 document.addEventListener("keydown", function(e){
@@ -79,6 +79,27 @@ function moveBola(){
     }
     bola.x += (bola.velocidade + bola.mod) * bola.dirx;
     bola.y += (bola.velocidade + bola.mod) * bola.diry;
+
+    if(bola.x < esquerda.x + esquerda.largura - 15){
+        novoJogo("Player 2");
+    }
+    else if(bola.x + bola.largura > direita.x + 15){
+        novoJogo("Player 1");
+    }
+}
+    
+
+function novoJogo(vencedor){
+    if(vencedor == "Player 1"){
+        esquerda.score++;
+    }else{
+        direita.score++;
+    }
+    esquerda.y = canvas.height / 2 - esquerda.altura / 2;
+    direita.y = esquerda.y;
+    bola.y = canvas.height / 2 - bola.altura / 2;
+    bola.x = canvas.width / 2 - bola.largura / 2;s
+    bola.mod = 0;
 }
 
 function desenha(){
