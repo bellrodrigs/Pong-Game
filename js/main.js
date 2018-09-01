@@ -11,7 +11,7 @@ var bola = {
     y: canvas.height / 2 - 10,
     altura: 20,
     largura: 20,
-    dirx: 0,
+    dirx: -1,
     diry: 1,
     mod: 0,
     velocidade: 50
@@ -59,10 +59,33 @@ function moveBlocos(){
     }
 }
 
+function moveBola(){
+    if(bola.y + bola.altura >= esquerda.y && bola.y <= esquerda.y + esquerda.altura
+       && bola.x <= esquerda.x + esquerda.largura){
+                bola.dirx = 1;
+                bola.mod += 0.2;
+    }
+    else if(bola.y + bola.altura >= direita.y && bola.y <= direita.y + direita.altura
+            && bola.x + bola.largura >= direita.x){
+                bola.dirx = -1;
+                bola.mod += 0.2;
+
+    }
+    if(bola.y <= 0){
+        bola.diry = 1;
+    }
+    else if(bola.y + bola.altura >= canvas.height){
+        bola.diry = -1;
+    }
+    bola.x += (bola.velocidade + bola.mod) * bola.dirx;
+    bola.y += (bola.velocidade + bola.mod) * bola.diry;
+}
+
 function desenha(){
 
     ctx.clearRect(0,0, canvas.width, canvas.height);
     moveBlocos();
+    moveBola();
 
     ctx.fillStyle = "white";
     ctx.fillRect(esquerda.x, esquerda.y, esquerda.largura, esquerda.altura);
@@ -77,4 +100,3 @@ function desenha(){
 //ctx.fillStyle = "white";
 //ctx.fillRect(100,190,10,150);
 
-//https://www.youtube.com/watch?v=pMlWshUMUuE
